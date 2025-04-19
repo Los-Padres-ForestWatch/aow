@@ -40,3 +40,15 @@ addLayerWithPopup(
   { color: '#ff7700', weight: 1, opacity: 0.4, fillColor: '#ff7700', fillOpacity: 0.4 },
   'Carrizo Plain', 'National Monument'
 );
+
+addLayerWithPopup(
+    'https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/bcnwr_public-land.geojson',
+    { color: '#ce50ff', weight: 1, opacity: 0.4, fillColor: '#ce50ff', fillOpacity: 0.4 },
+    'Bitter Creek', 'National Wildlife Refuge'
+);
+
+addLayerWithPopup(
+    'https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/hmnwr_public-land.geojson',
+    { color: '#ce50ff', weight: 1, opacity: 0.4, fillColor: '#ce50ff', fillOpacity: 0.4 },
+    'Hopper Mountain', 'National Wildlife Refuge'
+);
