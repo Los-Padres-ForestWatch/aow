@@ -1,24 +1,32 @@
 var map = L.map('map').setView([35.3, -120.5], 8);
 
 function addLayerWithPopup(geojsonUrl, style, titleText, subtitleText, popupClass) {
-  fetch(geojsonUrl)
-    .then(res => res.json())
-    .then(data => {
-      L.geoJSON(data, {
-        style: style,
-        onEachFeature: function (feature, layer) {
-          layer.on('click', function () {
-            layer.bindPopup(`
-              <div class="popup-card ${popupClass}">
-                <div class="popup-title">${titleText}</div>
-                <div class="popup-subtitle">${subtitleText}</div>
-              </div>
-            `).openPopup();
-          });
-        }
-      }).addTo(map);
-    });
-}
+    console.log(`Fetching ${titleText} from ${geojsonUrl}`);
+    fetch(geojsonUrl)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log(`${titleText} data:`, data);
+        const layer = L.geoJSON(data, {
+          style: style,
+          onEachFeature: function (feature, layer) {
+            layer.on('click', function () {
+              layer.bindPopup(`
+                <div class="popup-card ${popupClass}">
+                  <div class="popup-title">${titleText}</div>
+                  <div class="popup-subtitle">${subtitleText}</div>
+                </div>
+              `).openPopup();
+            });
+          }
+        }).addTo(map);
+      })
+      .catch(error => {
+        console.error(`Failed to load ${titleText}:`, error);
+      });
+  }  
 
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics',
