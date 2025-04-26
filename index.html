@@ -5,19 +5,21 @@
     <title>ForestWatch Area of Work</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/css/map-style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/css/map-style.css" />
+
 </head>
 <body>
 
-<div id="map"></div>
+    <div id="leaflet-container" style="background-color: #f0f5f0; width: 1200px; padding: 2rem; margin: 0 auto;">
+        <div id="map" style="height: 800px; width: 100%;">
+            <div id="zoom-warning">Hold Shift and scroll to zoom</div>
+    </div> 
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<script src="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/js/map-script.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/js/map-script.js"></script>
 
 </body>
 </html>

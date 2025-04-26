@@ -1,59 +1,148 @@
-/* DOCUMENT INFORMATION
-    - Document: Leaflet Map Stylesheet
-    - Author: Los Padres ForestWatch
-*/
-
 html, body {
     margin: 0;
     height: 100%;
 }
 
 #map {
+    position: relative;
     height: 100%;
     width: 100%;
 }
 
+#leaflet-container {
+    background-color: #f0f5f0;
+    width: 1200px;
+    padding: 2rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.leaflet-container img.leaflet-tile {
+    mix-blend-mode: normal !important;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1) {
+    .leaflet-container img.leaflet-tile {
+        width: 258px !important;
+        height: 258px !important;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    .leaflet-container img.leaflet-tile {
+        width: 256px !important;
+        height: 256px !important;
+    }
+}
+
 .leaflet-popup-content-wrapper {
-    background: rgba(0, 0, 0, 0.75);
-    border-radius: 0.25rem;
+    background: #e6eeee;
+    border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.4);
     border: none;
-    width: 12rem;
-    max-width: 90vw;
+    padding: 0;
+    width: 320px !important;
+    max-width: 320px !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 400px) {
+    .leaflet-popup-content-wrapper {
+        width: 90vw !important;
+        max-width: 90vw !important;
+    }
+}
+
+.custom-popup {
+    width: 320px;
+    box-sizing: border-box;
+    padding: 1rem;
 }
 
 .leaflet-popup-tip-container {
     display: none;
 }
 
-.leaflet-popup-content {
-    max-width: 18rem; 
-    width: 100%;       
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
+.leaflet-popup {
+    padding: 0 !important;
+}
+
+.leaflet-popup-content-wrapper {
+    position: relative;
+}
+
+.leaflet-popup-close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0,0,0,0.25);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.custom-label {
+    display: block;
+    min-width: 9rem;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+    line-height: 1.25;
+    pointer-events: none;
+    box-shadow: none;
+    background: none;
+    border: none;
 }
 
-.popup-card {
-    padding: 0.75rem 1rem;
-    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.6);
-    color: #fff;
+.leaflet-tooltip,
+.leaflet-tooltip-content {
+    max-width: none !important;
+    width: auto !important;
+}
+
+#zoom-warning {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-sizing: border-box; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 1001;
 }
 
-.popup-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 0.25rem;
-}
-
-.popup-subtitle {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: #ccc;
+#zoom-warning.ready {
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
