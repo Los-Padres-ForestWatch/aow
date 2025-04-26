@@ -187,7 +187,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/Worl
 }).addTo(map);
 
 // Add all vector overlay layers
-addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/layers/lpnf_public-land.geojson',
+addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/lpnf_public-land.geojson',
     { color: '#66CDAA', weight: 1, opacity: 0.4, fillColor: '#66CDAA', fillOpacity: 0.4 },
     'Los Padres National Forest',
     'Rising from the Pacific Ocean to over 8,800 feet in elevation...',
@@ -198,7 +198,7 @@ addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update
     labelMarkers["Los Padres National Forest"]
 );
 
-addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/layers/cpnm_public-land.geojson',
+addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/cpnm_public-land.geojson',
     { color: '#ff7700', weight: 1, opacity: 0.4, fillColor: '#ff7700', fillOpacity: 0.4 },
     'Carrizo Plain National Monument',
     'A stunning 204,000-acre protected landscape in the San Joaquin Valley...',
@@ -209,7 +209,7 @@ addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update
     labelMarkers["Carrizo Plain National Monument"]
 );
 
-addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/layers/bcnwr_public-land.geojson',
+addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/bcnwr_public-land.geojson',
     { color: '#EFDF09', weight: 1, opacity: 0.4, fillColor: '#EFDF09', fillOpacity: 0.4 },
     'Bitter Creek National Wildlife Refuge',
     'This 14,097-acre landscape protects habitat within an important...',
@@ -220,7 +220,7 @@ addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update
     null
 );
 
-addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@update-v1.3.0/layers/hmnwr_public-land.geojson',
+addLayerWithPopup('https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/layers/hmnwr_public-land.geojson',
     { color: '#EFDF09', weight: 1, opacity: 0.4, fillColor: '#EFDF09', fillOpacity: 0.4 },
     'Hopper Mountain National Wildlife Refuge',
     'This 2,471-acre Refuge adjoins the southern boundary of the Sespe Condor Sanctuary...',
