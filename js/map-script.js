@@ -151,14 +151,15 @@ const labelMarkers = {
 
 Object.values(labelMarkers).forEach(marker => marker.addTo(map));
 
-// Hide labels when zoomed in
+// Hide labels when zoomed outside of a certain range
 const labelHideMaxZoom = 9;
+const labelHideMinZoom = 7;
 
 map.on('zoomend', () => {
     const currentZoom = map.getZoom();
 
     Object.values(labelMarkers).forEach(marker => {
-        if (currentZoom <= labelHideMaxZoom) {
+        if (currentZoom > labelHideMinZoom && currentZoom <= labelHideMaxZoom) {
             if (!map.hasLayer(marker)) marker.addTo(map);
         } else {
             if (map.hasLayer(marker)) map.removeLayer(marker);
