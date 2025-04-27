@@ -103,7 +103,7 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                 pane: 'geojsonPane',
                 style: style,
                 onEachFeature: function (feature, layer) {
-                    layer.on('click', function () {
+                    layer.on('click', function (e) {
                         layer.bindPopup(
                             `<div class="custom-popup">
                                 <a href="${cardLink}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
@@ -121,7 +121,7 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                                 </a>
                             </div>`,
                             { maxWidth: "auto", className: "custom-popup" }
-                        ).openPopup();
+                        ).openPopup(e.latlng);
 
                         if (labelMarker) {
                             map.removeLayer(labelMarker);
