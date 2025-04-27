@@ -5,21 +5,44 @@
     <title>ForestWatch Area of Work</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Load critical CSS statically -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/css/map-style.css" />
+    <link id="map-style" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/css/map-style.css" />
 
+    <!-- Define which branch to pull from -->
+    <script>
+        const cdnBranch = 'update-v1.3.1';
+    </script>
+
+    <!-- Load critical JS statically -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+    <!-- Adjust CSS if different branch is needed -->
+    <script>
+        const cdnBase = 'https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@' + cdnBranch;
+
+        // If not using 'main', adjust CSS dynamically
+        if (cdnBranch !== 'main') {
+            document.getElementById('map-style').href = cdnBase + '/css/map-style.css';
+        }
+    </script>
 </head>
+
 <body>
 
     <div id="leaflet-container" style="background-color: #f0f5f0; width: 1200px; padding: 2rem; margin: 0 auto;">
         <div id="map" style="height: 800px; width: 100%;">
             <div id="zoom-warning">Hold Shift and scroll to zoom</div>
+        </div>
     </div> 
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/Los-Padres-ForestWatch/aow@main/js/map-script.js"></script>
+    <script>
+        const mapScript = document.createElement('script');
+        mapScript.src = cdnBase + '/js/map-script.js';
+        document.body.appendChild(mapScript);
+    </script>
 
 </body>
 </html>
