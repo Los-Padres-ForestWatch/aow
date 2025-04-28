@@ -3,8 +3,8 @@
  * Description: Initializes Leaflet map, loads imagery and overlays, and adds styled GeoJSON layers with popups.
  * Author: Bryant Baker/Los Padres ForestWatch
  * License: CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
- * Date: 2024-04-26
- * Version: 1.3.0
+ * Date: 2025-04-27
+ * Version: 1.3.1
  * Dependencies:
  *   - Leaflet (https://leafletjs.com)
  *   - Esri Tiled Map Services
@@ -66,6 +66,14 @@ mapContainer.addEventListener('wheel', function (e) {
     }
 }, { passive: false });
 
+// Allow click events to close the zoom warning
+mapContainer.addEventListener('click', function () {
+    if (zoomWarning.style.opacity > 0) {
+        zoomWarning.style.opacity = 0;
+        clearTimeout(warningTimeout);
+    }
+});
+
 // Create custom panes to control z-index of layers
 map.createPane('imageryPane');
 map.getPane('imageryPane').style.zIndex = 200;
@@ -95,7 +103,7 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                 pane: 'geojsonPane',
                 style: style,
                 onEachFeature: function (feature, layer) {
-                    layer.on('click', function () {
+                    layer.on('click', function (e) {
                         layer.bindPopup(
                             `<div class="custom-popup">
                                 <a href="${cardLink}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
@@ -113,7 +121,7 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                                 </a>
                             </div>`,
                             { maxWidth: "auto", className: "custom-popup" }
-                        ).openPopup();
+                        ).openPopup(e.latlng);
 
                         if (labelMarker) {
                             map.removeLayer(labelMarker);
