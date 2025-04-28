@@ -3,8 +3,8 @@
  * Description: Initializes Leaflet map, loads imagery and overlays, and adds styled GeoJSON layers with popups.
  * Author: Bryant Baker/Los Padres ForestWatch
  * License: CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
- * Date: 2025-04-27
- * Version: 1.3.1
+ * Date: 2025-04-28
+ * Version: 1.3.2
  * Dependencies:
  *   - Leaflet (https://leafletjs.com)
  *   - Esri Tiled Map Services
@@ -33,14 +33,14 @@ map.scrollWheelZoom.disable();
 const mapContainer = map.getContainer();
 
 mapContainer.addEventListener('wheel', function (e) {
-    
-    // Always block browser page scroll
-    e.preventDefault(); 
 
     // Allow scroll zooming only when shift key is pressed
     if (e.shiftKey) {
         
-        // Clear zoom warning
+        // Prevent page scroll
+        e.preventDefault(); 
+
+        // Dismiss zoom warning
         zoomWarning.style.opacity = 0;
         clearTimeout(warningTimeout);
 
@@ -66,7 +66,7 @@ mapContainer.addEventListener('wheel', function (e) {
     }
 }, { passive: false });
 
-// Allow click events to close the zoom warning
+// Allow click events inside map container to dismiss zoom warning
 mapContainer.addEventListener('click', function () {
     if (zoomWarning.style.opacity > 0) {
         zoomWarning.style.opacity = 0;
@@ -90,8 +90,22 @@ map.getPane('labelsPane').style.zIndex = 800;
 map.createPane('popupPane');
 map.getPane('popupPane').style.zIndex = 1000;
 
-// Function to add stylized geoJSON layers with popups
-// When geoJSON polygon is clicked, enhanced popup opens and label is hidden
+/*
+*** Function to add GeoJSON layer with popup ***
+* Adds a GeoJSON layer with a customized popup
+* that includes the layer name, an image, some
+* preview text, and a link to a child page.
+* Parameters:
+* - geojsonUrl: URL of the GeoJSON file
+* - style: How the layer should appear on the map
+* - cardTitle: Title of the popup
+* - cardText: Text to display in the popup
+* - cardLink: URL to the child page
+* - cardImage: URL of the image to display in the popup
+* - cardColor: Color of the title text
+* - buttonColor: Color of the "Learn More" button in the popup
+* - labelMarker: Optional label marker to hide/show on click
+*/
 function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, cardImage, cardColor, buttonColor, labelMarker) {
     fetch(geojsonUrl)
         .then(res => {
@@ -106,7 +120,7 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                     layer.on('click', function (e) {
                         layer.bindPopup(
                             `<div class="custom-popup">
-                                <a href="${cardLink}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
+                                <a href="${cardLink}" target="_self" style="text-decoration: none; display: block;">
                                     <div class="childpage-image">
                                         <img src="${cardImage}" alt="${cardTitle}" width="300" height="169"
                                             style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 0.75rem;" />
