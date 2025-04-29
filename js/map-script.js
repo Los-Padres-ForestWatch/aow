@@ -3,8 +3,8 @@
  * Description: Initializes Leaflet map, loads imagery and overlays, and adds styled GeoJSON layers with popups.
  * Author: Bryant Baker/Los Padres ForestWatch
  * License: CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
- * Date: 2025-04-28
- * Version: 1.3.2
+ * Date: 2025-04-29
+ * Version: 1.3.3
  * Dependencies:
  *   - Leaflet (https://leafletjs.com)
  *   - Esri Tiled Map Services
@@ -143,7 +143,8 @@ function addLayerWithPopup(geojsonUrl, style, cardTitle, cardText, cardLink, car
                     });
 
                     layer.on('popupclose', function () {
-                        if (labelMarker) {
+                        const currentZoom = map.getZoom();
+                        if (labelMarker && currentZoom > labelHideMinZoom && currentZoom <= labelHideMaxZoom) {
                             map.addLayer(labelMarker);
                         }
                     });
